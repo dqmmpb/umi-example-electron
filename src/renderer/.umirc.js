@@ -2,15 +2,21 @@ import {join} from 'path';
 import slash from 'slash';
 
 export default {
-  disableDynamicImport: true,
   history: 'hash',
-  // publicPath: './static/',
-  outputPath: '../../app/dist/renderer',
+  base: './',
+  publicPath: './',
+  outputPath: '../../dist/renderer',
   plugins: [
-    /*[
+/*    [
       '@babel/plugin-proposal-decorators',
       {
         legacy: true
+      }
+    ],
+    [
+      "@babel/plugin-proposal-class-properties",
+      {
+        loose: true
       }
     ],*/
     [
@@ -19,12 +25,12 @@ export default {
         dva: {
           immer: true,
         },
-        pwa: {
-          workboxPluginMode: 'InjectManifest',
-          workboxOptions: {
-            importWorkboxFrom: 'local',
-          },
-        },
+        // pwa: {
+        //   workboxPluginMode: 'InjectManifest',
+        //   workboxOptions: {
+        //     importWorkboxFrom: 'local',
+        //   },
+        // },
         dynamicImport: {
           webpackChunkName: true,
         },
@@ -56,4 +62,7 @@ export default {
     }
     callback(null, isExternal);
   },
+  chainWebpack(config, { webpack }) {
+    config.target('electron-renderer');
+  }
 };

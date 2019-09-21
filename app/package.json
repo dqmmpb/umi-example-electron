@@ -8,6 +8,7 @@
     "email": "sorrycc@gmail.com"
   },
   "dependencies": {
+    "source-map-support": "^0.5.12",
     "electron-store": "^2.0.0",
     "electron-is": "^3.0.0",
     "electron-log": "^3.0.8"

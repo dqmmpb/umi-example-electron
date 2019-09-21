@@ -18,41 +18,42 @@
   "scripts": {
     "start": "electron app/dist/main/main",
     "dev": "concurrently \"npm run dev:renderer\" \"npm run dev:main\"",
-    "dev:main": "ESLINT=none BROWSER=none COMPRESS=none roadhog build -w",
+    "dev:main": "ESLINT=none BROWSER=none electron-webpack dev",
     "dev:renderer": "APP_ROOT=src/renderer BROWSER=none ESLINT=none umi dev",
-    "build": "npm run build:main && npm run build:renderer",
-    "build:main": "ESLINT=none roadhog build",
+    "build": "npm run build:renderer && npm run build:main",
+    "build:main": "ESLINT=none electron-webpack",
     "build:renderer": "APP_ROOT=src/renderer ESLINT=none umi build",
-    "pack": "npm run build && npm run rebuild && build",
-    "pack:dir": "npm run build && npm run rebuild && build --dir",
-    "pack:dirOnly": "build --dir",
-    "rebuild": "electron-rebuild -m ./app"
+    "compile": "electron-webpack",
+    "dist": "yarn compile && electron-builder",
+    "dist:dir": "yarn dist --dir -c.compression=store -c.mac.identity=null"
+  },
+  "dependencies": {
+    "@babel/plugin-proposal-decorators": "^7.6.0",
+    "source-map-support": "^0.5.12"
   },
   "devDependencies": {
     "@babel/core": "^7.6.0",
-    "@babel/plugin-proposal-decorators": "^7.6.0",
+    "@babel/plugin-proposal-class-properties": "^7.5.5",
     "@babel/polyfill": "^7.6.0",
     "@babel/preset-env": "^7.6.0",
     "@babel/preset-react": "^7.0.0",
     "@babel/register": "^7.6.0",
     "@babel/runtime": "^7.6.0",
-    "af-webpack": "^1.10.3",
     "concurrently": "^3.5.1",
-    "electron": "^2.0.2",
-    "electron-builder": "^20.15.1",
+    "electron": "^5.0.6",
+    "electron-builder": "^21.0.11",
     "electron-debug": "^2.0.0",
     "electron-is": "^3.0.0",
     "electron-log": "^3.0.8",
     "electron-rebuild": "^1.7.3",
     "electron-store": "^2.0.0",
-    "extract-text-webpack-plugin": "^4.0.0-beta.0",
-    "mini-css-extract-plugin": "^0.8.0",
-    "roadhog": "^2.5.0-beta.4",
+    "electron-webpack": "^2.7.4",
     "slash": "^2.0.0",
     "umi": "^2.8.20",
     "umi-build-dev": "^1.12.0",
     "umi-plugin-dva": "^1.8.0",
     "umi-plugin-react": "^1.10.1",
-    "webpack": "^3.12.0"
+    "webpack": "^4.38.0",
+    "webpack-dev-server": "^3.7.2"
   }
 }
