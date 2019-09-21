@@ -1,17 +1,39 @@
-import { join } from 'path';
+import {join} from 'path';
 import slash from 'slash';
 
 export default {
-  disableServiceWorker: true,
   disableDynamicImport: true,
-  hashHistory: true,
-  publicPath: './static/',
+  history: 'hash',
+  // publicPath: './static/',
   outputPath: '../../app/dist/renderer',
   plugins: [
-    ['umi-plugin-dva', {
-      immer: true,
-    }],
+    /*[
+      '@babel/plugin-proposal-decorators',
+      {
+        legacy: true
+      }
+    ],*/
+    [
+      'umi-plugin-react',
+      {
+        dva: {
+          immer: true,
+        },
+        pwa: {
+          workboxPluginMode: 'InjectManifest',
+          workboxOptions: {
+            importWorkboxFrom: 'local',
+          },
+        },
+        dynamicImport: {
+          webpackChunkName: true,
+        },
+      }
+    ],
   ],
+  manifest: {
+    basePath: '/',
+  },
   externals(context, request, callback) {
     const isDev = process.env.NODE_ENV === 'development';
     let isExternal = false;
@@ -24,7 +46,7 @@ export default {
       'child_process'
     ];
     if (load.includes(request)) {
-      isExternal = `require("${request}")`;
+      isExternal = `require('${request}')`;
     }
     const appDeps = Object.keys(require('../../app/package').dependencies);
     if (appDeps.includes(request)) {

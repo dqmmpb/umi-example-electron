@@ -1,3 +1,3 @@
-import Config from 'electron-config';
+import Store from 'electron-store';
 
-export default new Config({ name: 'config' });
+export default new Store({ name: 'config' });
