@@ -16,33 +16,38 @@ Electron example with [umi](https://github.com/umijs/umi/) and [dva](https://git
 # 安装依赖
 $ npm i
 
-# 安装 app 目录依赖（注意这里不要用 cnpm 或 tnpm，pack 时会丢失 node_modules）
+# 安装 app 的 electron 依赖
 $ cd app
 $ npm i
 $ cd ../
-
-# rebuild 生产依赖
-$ npm run rebuild
 ```
 
 启动本地调试。
 
 ```bash
-$ npm run dev
-```
+# 调试web
+$ npm start
 
-你也可以分开运行 `npm run dev:renderer` 和 `npm run dev:main`。
+# 调试electron
+$ npm run dev:electron
+
+# 打标前独立的预编译electron
+$ npm run compile:electron
+```
 
 打包。
 
 ```bash
-$ npm run pack
+# 打包web
+$ npm run build:web
+
+# 打包electron(根据)
+$ npm run pack:electron
 
 # 不打 dmg、exe 包，本地验证时用
-$ npm run pack:dir
+$ npm run pack:electron:dir
 
-# 不重复做 webpack 层的构建和 rebuild，本地验证打包流程用
-$ npm run pack:dirOnly
+
 ```
 
 ## 截图
@@ -55,15 +60,18 @@ $ npm run pack:dirOnly
 
 ```
 + app
-  + dist              // src 目录打包完放这里，分 main 和 renderer
-  - package.json      // 生产依赖，存 dependencies
-+ build               // background.png, icon.icns, icon.ico
-+ dist                // pack 完后的输出，.dmg, .exe, .zip, .app 等文件
-+ src
-  + main              // main
-  + renderer          // renderer
-- package.json        // 开发依赖，存 devDependencies
-- webpack.config.js   // 给 main 用的 webpack 配置
+  - package.json             // 生产依赖，存 dependencies
++ build                      // 打包文件
+  + electron                 // pack:electron输出目录，linux_unpack, .dmg, .exe, .zip, .app 等文件
+  + web                      // build:web输出目录，web版本
++ dist                       // compile:electron输出目录，分 main 和 renderer
++ src                        // src 源码
+  + main                     // main
+  + renderer                 // renderer
++ static                     // static
+- electron-webpack.json      // electron-webpack 配置
+- package.json               // 开发依赖，存 devDependencies
+- webpack.main.additong.js   // 给 main 用的 webpack 配置
 ```
 
 几点说明：

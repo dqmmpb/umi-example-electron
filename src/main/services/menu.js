@@ -4,7 +4,7 @@ import log from 'electron-log';
 function getTemplate() {
   return [
     {
-      label: 'MyApp',
+      label: 'File',
       submenu: [
         { role: 'hide' },
         { role: 'hideothers' },

@@ -3,37 +3,39 @@
   "version": "1.0.0",
   "private": true,
   "author": {
-    "name": "chencheng",
-    "email": "sorrycc@gmail.com"
+    "name": "dengqiming",
+    "email": "dqmmpb@163.com"
   },
   "build": {
     "files": [
       "./dist/**/*",
-      "./pages/**/*",
       "./node_modules/**/*"
     ],
-    "appId": "com.sorrycc.umi-example-electron",
-    "asar": false
+    "appId": "com.izaiqi.umi-example-electron",
+    "asar": false,
+    "directories": {
+      "output": "./build/electron"
+    }
   },
   "scripts": {
-    "start": "electron app/dist/main/main",
-    "dev": "concurrently \"npm run dev:renderer\" \"npm run dev:main\"",
-    "dev:main": "ESLINT=none BROWSER=none electron-webpack dev",
-    "dev:renderer": "APP_ROOT=src/renderer BROWSER=none ESLINT=none umi dev",
-    "build": "npm run build:renderer && npm run build:main",
-    "build:main": "ESLINT=none electron-webpack",
-    "build:renderer": "APP_ROOT=src/renderer ESLINT=none umi build",
-    "compile": "electron-webpack",
-    "dist": "yarn compile && electron-builder",
-    "dist:dir": "yarn dist --dir -c.compression=store -c.mac.identity=null"
+    "start": "APP_ROOT=src/renderer BROWSER=none ESLINT=none umi dev",
+    "build:web": "APP_ROOT=src/renderer ESLINT=none umi build",
+    "dev:electron": "concurrently \"npm run dev:electron:renderer\" \"npm run dev:electron:main\"",
+    "dev:electron:main": "ESLINT=none BROWSER=none UMI_ENV=electron electron-webpack dev",
+    "dev:electron:renderer": "APP_ROOT=src/renderer BROWSER=none ESLINT=none UMI_ENV=electron umi dev",
+    "compile:electron": "rm -rf ./dist && npm run compile:electron:renderer && npm run compile:electron:main",
+    "compile:electron:main": "ESLINT=none electron-webpack",
+    "compile:electron:renderer": "APP_ROOT=src/renderer ESLINT=none UMI_ENV=electron umi build",
+    "pack:electron:dir": "rm -rf ./build/electron && yarn compile:electron && electron-builder --dir",
+    "pack:electron": "rm -rf ./build/electron && yarn compile:electron && electron-builder"
   },
   "dependencies": {
     "@babel/plugin-proposal-decorators": "^7.6.0",
+    "@babel/plugin-proposal-class-properties": "^7.5.5",
     "source-map-support": "^0.5.12"
   },
   "devDependencies": {
     "@babel/core": "^7.6.0",
-    "@babel/plugin-proposal-class-properties": "^7.5.5",
     "@babel/polyfill": "^7.6.0",
     "@babel/preset-env": "^7.6.0",
     "@babel/preset-react": "^7.0.0",
@@ -49,7 +51,7 @@
     "electron-store": "^2.0.0",
     "electron-webpack": "^2.7.4",
     "slash": "^2.0.0",
-    "umi": "^2.8.20",
+    "umi": "^2.9.6",
     "umi-build-dev": "^1.12.0",
     "umi-plugin-dva": "^1.8.0",
     "umi-plugin-react": "^1.10.1",

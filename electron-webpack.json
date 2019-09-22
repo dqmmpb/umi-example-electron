@@ -1,8 +1,6 @@
 {
-  "commonSourceDirectory": "src/common",
-  "staticSourceDirectory": "src/static",
   "main": {
-    "webpackConfig": "webpack.main.js"
+    "webpackConfig": "webpack.main.additions.js"
   },
   "renderer": {
     "sourceDirectory": null

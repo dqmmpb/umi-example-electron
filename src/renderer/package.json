@@ -16,24 +16,25 @@
     "asar": false
   },
   "scripts": {
-    "start": "electron app/dist/main/main",
-    "dev": "concurrently \"npm run dev:renderer\" \"npm run dev:main\"",
-    "dev:main": "ESLINT=none BROWSER=none electron-webpack dev",
-    "dev:renderer": "APP_ROOT=src/renderer BROWSER=none ESLINT=none umi dev",
+    "start": "APP_ROOT=src/renderer BROWSER=none ESLINT=none umi dev",
+    "start:electron": "concurrently \"npm run dev:renderer\" \"npm run dev:main\"",
+    "dev:main": "ESLINT=none BROWSER=none UMI_ENV=electron electron-webpack dev",
+    "dev:renderer": "APP_ROOT=src/renderer BROWSER=none ESLINT=none UMI_ENV=electron umi dev",
     "build": "npm run build:renderer && npm run build:main",
     "build:main": "ESLINT=none electron-webpack",
     "build:renderer": "APP_ROOT=src/renderer ESLINT=none umi build",
     "compile": "electron-webpack",
     "dist": "yarn compile && electron-builder",
-    "dist:dir": "yarn dist --dir -c.compression=store -c.mac.identity=null"
+    "dist:dir": "yarn dist --dir -c.compression=store -c.mac.identity=null",
+    "build:web": "APP_ROOT=src/renderer ESLINT=none umi build"
   },
   "dependencies": {
     "@babel/plugin-proposal-decorators": "^7.6.0",
+    "@babel/plugin-proposal-class-properties": "^7.5.5",
     "source-map-support": "^0.5.12"
   },
   "devDependencies": {
     "@babel/core": "^7.6.0",
-    "@babel/plugin-proposal-class-properties": "^7.5.5",
     "@babel/polyfill": "^7.6.0",
     "@babel/preset-env": "^7.6.0",
     "@babel/preset-react": "^7.0.0",
@@ -49,10 +50,11 @@
     "electron-store": "^2.0.0",
     "electron-webpack": "^2.7.4",
     "slash": "^2.0.0",
-    "umi": "^2.8.20",
+    "umi": "^2.9.6",
     "umi-build-dev": "^1.12.0",
     "umi-plugin-dva": "^1.8.0",
     "umi-plugin-react": "^1.10.1",
+    "webpack": "^4.38.0",
     "webpack-dev-server": "^3.7.2"
   }
 }
