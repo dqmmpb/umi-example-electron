@@ -62,9 +62,9 @@ $ npm run pack:electron:dir
 + app
   - package.json             // 生产依赖，存 dependencies
 + build                      // 打包文件
-  + electron                 // pack:electron输出目录，linux_unpack, .dmg, .exe, .zip, .app 等文件
-  + web                      // build:web输出目录，web版本
-+ dist                       // compile:electron输出目录，分 main 和 renderer
+  + electron                 // pack:electron 输出目录， .dmg, .exe, .zip, .app 等文件
+  + web                      // build:web 输出目录，web版本
++ dist                       // compile:electron 输出目录，分 main 和 renderer
 + src                        // src 源码
   + main                     // main
   + renderer                 // renderer
