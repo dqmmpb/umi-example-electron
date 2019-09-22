@@ -2,15 +2,15 @@
   "name": "umi-example-electron",
   "version": "1.0.0",
   "description": "Yet another boilerplate for umi+dva+electron.",
-  "main": "dist/main/main.js",
   "author": {
     "name": "dengqiming",
     "email": "dqmmpb@163.com"
   },
+  "main": "dist/main/main.js",
   "dependencies": {
-    "source-map-support": "^0.5.12",
-    "electron-store": "^2.0.0",
     "electron-is": "^3.0.0",
-    "electron-log": "^3.0.8"
+    "electron-log": "^3.0.8",
+    "electron-store": "^2.0.0",
+    "source-map-support": "^0.5.12"
   }
 }
