@@ -4,8 +4,8 @@
   "description": "Yet another boilerplate for umi+dva+electron.",
   "main": "dist/main/main.js",
   "author": {
-    "name": "chencheng",
-    "email": "sorrycc@gmail.com"
+    "name": "dengqiming",
+    "email": "dqmmpb@163.com"
   },
   "dependencies": {
     "source-map-support": "^0.5.12",
