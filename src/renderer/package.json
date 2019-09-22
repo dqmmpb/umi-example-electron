@@ -12,9 +12,14 @@
       "./node_modules/**/*"
     ],
     "appId": "com.izaiqi.umi-example-electron",
+    "productName":"umi-example-electron",
+    "copyright": "Copyright @ 2019",
     "asar": false,
     "directories": {
       "output": "./build/electron"
+    },
+    "mac": {
+      "target": "tar.gz"
     }
   },
   "scripts": {
